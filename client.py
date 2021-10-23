@@ -33,7 +33,8 @@ class SocketClient():
             print('[{0}] input data : {1}'.format(
                 datetime.now().strftime('%Y-%m-%d %H:%M:%S'), input_data))
             # 入力データをサーバーへ送信
-            sock.send(input_data.encode('utf-8'))
+            sock.send(input_data)
+#            sock.send(input_data.encode('utf-8'))
             # サーバーからのデータを受信
             rcv_data = sock.recv(self.datasize)
             rcv_data = rcv_data.decode('utf-8')
