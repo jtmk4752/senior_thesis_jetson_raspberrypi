@@ -55,5 +55,7 @@ if __name__ == '__main__':
         try:
             input_data =  ina219.current # ターミナルから入力された文字を取得
             client.send_recv(input_data)
+        except KeyboardInterrupt:
+            break
         except:
             pass
