@@ -3,18 +3,25 @@ import time
 from datetime import datetime
 from gpiozero import TonalBuzzer
 
+import board
+import adafruit_ina219
+
+
 HOST_IP = "192.168.0.1"  # 接続するサーバーのIPアドレス
 PORT = 9979  # 接続するサーバーのポート
-DATESIZE = 1024  # 受信データバイト数
+DATASIZE = 1024  # 受信データバイト数
 piezo = TonalBuzzer(26)
 
+i2c=board.I2C()
+ina219=adafruit_ina219.INA219(i2c)
 
 
 class SocketClient():
 
-    def __init__(self, host, port):
+    def __init__(self, host, port, datasize):
         self.host = host
         self.port = port
+        self.datasize = datasize
         self.socket = None
 
     def send_recv(self, input_data):
@@ -28,9 +35,9 @@ class SocketClient():
             # 入力データをサーバーへ送信
             sock.send(input_data.encode('utf-8'))
             # サーバーからのデータを受信
-            rcv_data = sock.recv(DATESIZE)
+            rcv_data = sock.recv(self.datasize)
             rcv_data = rcv_data.decode('utf-8')
-            if int(rcv_data) == 0:
+            if int(rcv_data) == 1:
             	piezo.play('A4')
             	time.sleep(3)
             	piezo.stop()
@@ -42,7 +49,7 @@ class SocketClient():
 
 if __name__ == '__main__':
 
-    client = SocketClient(HOST_IP, PORT)
+    client = SocketClient(HOST_IP, PORT,DATASIZE)
     while True:
-        input_data = input("send data:")  # ターミナルから入力された文字を取得
+        input_data =  ina219.current # ターミナルから入力された文字を取得
         client.send_recv(input_data)
