@@ -45,11 +45,15 @@ class SocketClient():
             	pass
             print('[{0}] recv data : {1}'.format(
                 datetime.now().strftime('%Y-%m-%d %H:%M:%S'), rcv_data))
+            time.sleep(1)
 
 
 if __name__ == '__main__':
 
     client = SocketClient(HOST_IP, PORT,DATASIZE)
     while True:
-        input_data =  ina219.current # ターミナルから入力された文字を取得
-        client.send_recv(input_data)
+        try:
+            input_data =  ina219.current # ターミナルから入力された文字を取得
+            client.send_recv(input_data)
+        except:
+            pass
