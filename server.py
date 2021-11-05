@@ -58,7 +58,7 @@ class SocketServer():
                 rcv_data_decode = float(rcv_data.decode("utf-8"))
                 print(rcv_data_decode)
                 # データ受信したデータをそのままクライアントへ送信
-                client_socket.send(ina219.current.encode())
+                client_socket.send(ina219.current)
 
 
 
