@@ -7,7 +7,7 @@ import board
 import adafruit_ina219
 
 
-HOST_IP = "192.168.0.1"  # 接続するサーバーのIPアドレス
+HOST_IP = "192.168.200.1"  # 接続するサーバーのIPアドレス
 PORT = 9979  # 接続するサーバーのポート
 DATASIZE = 1024  # 受信データバイト数
 piezo = TonalBuzzer(26)
