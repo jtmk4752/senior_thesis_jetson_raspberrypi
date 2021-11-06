@@ -55,7 +55,7 @@ class SocketServer():
             while True:
                 # クライアントからデータ受信
                 rcv_data = client_socket.recv(self.datasize)
-                rcv_data_decode = float(rcv_data.decode("utf-8"))
+                rcv_data_decode = rcv_data.decode("utf-8")
                 print(rcv_data_decode)
                 # データ受信したデータをそのままクライアントへ送信
                 client_socket.send(bytes(int(ina219.current)))
