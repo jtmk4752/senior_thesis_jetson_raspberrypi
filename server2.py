@@ -44,14 +44,19 @@ class SocketServer():
         with client_socket:
             while True:
                 # クライアントからデータ受信
-                rcv_data = client_socket.recv(DATESIZE)
-                if rcv_data:
-                    snd_data = str(ina219.current).encode("utf-8")
-                    # データ受信したデータをそのままクライアントへ送信
-                    client_socket.send(snd_data)
-                    print('[{0}] recv date : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), rcv_data.decode('utf-8')) )
-                else:
-                    break
+                
+                snd_data = str(ina219.current).encode("utf-8")
+                client_socket.send(snd_data)
+
+
+#                rcv_data = client_socket.recv(DATESIZE)
+#                if rcv_data:
+#                    snd_data = str(ina219.current).encode("utf-8")
+#                    # データ受信したデータをそのままクライアントへ送信
+#                    client_socket.send(snd_data)
+#                    print('[{0}] recv date : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), rcv_data.decode('utf-8')) )
+#                else:
+#                    break
 
         print('[{0}] disconnect client -> address : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), address) )
 
