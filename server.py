@@ -14,7 +14,7 @@ CLIENTNUM = 5  # クライアントの接続上限数
 DATESIZE = 1024  # 受信データバイト数
 
 i2c=board.I2C()
-ina219=adafruit_ina219.INA219(i2c)
+ina219=adafruit_9.INA219(i2c)
 
 class SocketServer():
     def __init__(self, host, port, datasize, clientnum):

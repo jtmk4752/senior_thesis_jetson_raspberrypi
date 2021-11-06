@@ -2,10 +2,16 @@ import socket
 import threading
 from datetime import datetime
 
+import board
+import adafruit_ina219
+
 HOST_IP = "192.168.200.3" # サーバーのIPアドレス
 PORT = 9979 # 使用するポート
 CLIENTNUM = 3 # クライアントの接続上限数
 DATESIZE = 1024 # 受信データバイト数
+
+i2c=board.I2C()
+ina219=adafruit_ina219.INA219(i2c)
 
 class SocketServer():
     def __init__(self, host, port):
@@ -40,8 +46,9 @@ class SocketServer():
                 # クライアントからデータ受信
                 rcv_data = client_socket.recv(DATESIZE)
                 if rcv_data:
+                    snd_data = str(ina219.current).encode("utf-8")
                     # データ受信したデータをそのままクライアントへ送信
-                    client_socket.send(rcv_data)
+                    client_socket.send(snd_data)
                     print('[{0}] recv date : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), rcv_data.decode('utf-8')) )
                 else:
                     break
