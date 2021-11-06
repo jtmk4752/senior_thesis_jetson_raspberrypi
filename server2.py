@@ -2,7 +2,7 @@ import socket
 import threading
 from datetime import datetime
 
-HOST_IP = "192.168.200.2" # サーバーのIPアドレス
+HOST_IP = "192.168.200.3" # サーバーのIPアドレス
 PORT = 9979 # 使用するポート
 CLIENTNUM = 3 # クライアントの接続上限数
 DATESIZE = 1024 # 受信データバイト数
